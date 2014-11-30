@@ -1,0 +1,13 @@
+Problem 2
+Recover the password used to generate the second hash above. Hint: The password consists
+only of numbers.
+145219 is the password
+2. Give a pseudocode description of your algorithm and the worst case running time for it.
+n(for length 0 to n)*10(for each number 0 to 9)*n (For each position) =O(n square)
+
+3. Discuss the merits of your colleague’s proposal. Suggest how your attack might be made
+intractable.
+Usage of sha 256, even after bday paradox it would take a lt of time to brute force. Cryptographic hash function.
+Salt usage
+Different salt usage
+If the password complexity is increased then it would take years to bruteforce the passwrd

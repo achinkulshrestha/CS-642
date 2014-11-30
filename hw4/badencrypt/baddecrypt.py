@@ -58,6 +58,7 @@ if tagCheck != tag:
     sys.exit(0)
 
 plaintext = plaintextWithPad[:l-int(padbyte)-1]
+print plaintext
 # TODO: Insert routines to process recovered plaintext
 
 print "Message received!"
