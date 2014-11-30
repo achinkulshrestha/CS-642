@@ -6,11 +6,39 @@ Recover the password used to generate the second hash above. Hint: The password 
 only of numbers.
 145219 is the password
 2. Give a pseudocode description of your algorithm and the worst case running time for it.
+The problem boils down to permutation of number strings for different lengths. If hash of any of these strings matches the given hash. We have the answer.
+
+
+Pseudocode
+#define PASSWORD_MAX_LEN 100
+numberArray = ['0','1','2','3','4','5','6','7','8','9'] //Password Types
+currentPosition = 0 // Position on which we will put different values of array numberArray
+passwordBuffer =[] // Buffer that holds temporary password
+
+for PASSWORD_LEN 1 to 100
+	permute(currenPosition, PASSWORD_LEN, numberArray, passwordBuffer) 
+
+def permute(currentPosition, PASSWORD_LEN, numberArray, passwordBuffer)
+	if currentPosition is equal to PASSWORD_LEN
+		checkSHA256value(passwordBuffer)
+		return
+	for each value in numberArray
+		passwordBuffer[currentPosition] = value
+		permute(currentPosition+1, PASSWORD_LEN, numberArray, passwordBuffer) 
+
+def checkSHA256value(passwordBuffer)
+	calculate SHA Digest and compare to the given hash
+	If found equal
+		print passwordBuffer
+		print "Yippi"	
+
+Running Time
 n(for length 0 to n)*10(for each number 0 to 9)*n (For each position) =O(n square)
 
 3. Discuss the merits of your colleague’s proposal. Suggest how your attack might be made
 intractable.
-Usage of sha 256, even after bday paradox it would take a lt of time to brute force. Cryptographic hash function.
-Salt usage
-Different salt usage
-If the password complexity is increased then it would take years to bruteforce the passwrd
+1. SHA256 is a good cryptographic hash function. SHA1 is now being deprecated and usage of SHA2 is advised. Even due Birthday paradox bruteforcing sha2 would require 2^128 calculations which is huge. 
+
+2. A different salt was used while hashing each password. This makes bruteforcing difficult for a password dump since the attacker would need to use different salts for every password bruteforce.
+
+3. If the password complexity is improved(Special Characters, lower case,upper case, digits) then it would take years to bruteforce the password. Currently for every position there are 10 options. So effectively 10^password_length. For a 4-5 digit password, it is easy to bruteforce. If the complexity is improved then the computation required to bruteforce would increase by great amount.
