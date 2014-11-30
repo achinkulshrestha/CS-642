@@ -1,3 +1,6 @@
+Problem 1
+In diffie hellman values – G, g, g^x mod G, and g^y mod G – are sent in the clear. If the secret is created as g^x . g^y, then any attacker can create the resulting key g^x+y on his own. The scheme no longer remains secure. The most critical aspect of Diffie Hellmans security is the complexity of solving the discrete logarithm problem (DLP), which is to find x given g and g^x. By multiplying g^x and g^y to get the secret key we are making the protocol insecure.
+
 Problem 2
 Recover the password used to generate the second hash above. Hint: The password consists
 only of numbers.
