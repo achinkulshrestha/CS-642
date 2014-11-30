@@ -5,9 +5,9 @@ Problem 2
 Recover the password used to generate the second hash above. Hint: The password consists
 only of numbers.
 145219 is the password
+
 2. Give a pseudocode description of your algorithm and the worst case running time for it.
 The problem boils down to permutation of number strings for different lengths. If hash of any of these strings matches the given hash. We have the answer.
-
 
 Pseudocode
 #define PASSWORD_MAX_LEN 100
@@ -37,8 +37,73 @@ n(for length 0 to n)*10(for each number 0 to 9)*n (For each position) =O(n squar
 
 3. Discuss the merits of your colleague’s proposal. Suggest how your attack might be made
 intractable.
-1. SHA256 is a good cryptographic hash function. SHA1 is now being deprecated and usage of SHA2 is advised. Even due Birthday paradox bruteforcing sha2 would require 2^128 calculations which is huge. 
 
-2. A different salt was used while hashing each password. This makes bruteforcing difficult for a password dump since the attacker would need to use different salts for every password bruteforce.
+a. SHA256 is a good cryptographic hash function. SHA1 is now being deprecated and usage of SHA2 is advised. Even due Birthday paradox bruteforcing sha2 would require 2^128 calculations which is huge. 
 
-3. If the password complexity is improved(Special Characters, lower case,upper case, digits) then it would take years to bruteforce the password. Currently for every position there are 10 options. So effectively 10^password_length. For a 4-5 digit password, it is easy to bruteforce. If the complexity is improved then the computation required to bruteforce would increase by great amount.
+b. A different salt was used while hashing each password. This makes bruteforcing difficult for a password dump since the attacker would need to use different salts for every password bruteforce.
+
+c. If the password complexity is improved(Special Characters, lower case,upper case, digits) then it would take years to bruteforce the password. Currently for every position there are 10 options. So effectively 10^password_length. For a 4-5 digit password, it is easy to bruteforce. If the complexity is improved then the computation required to bruteforce would increase by great amount.
+
+Problem 3
+Pseudocode description
+
+Badencrypt.py
+Read Key file 
+Use first 16 Bytes as Key1 for symmetric Encrytion
+Use Second 16 Bytes as Key2 for MAC generation
+Read Plaintext Message
+Calculate Padbyte depending on the message length
+	Padbyte has to be one less than the total bytes to be padded
+Create Padded message
+	message + (Padbyte * No of bytes to be padded)
+Generate a random Initialization vector IV
+Encrypt Message using AES-CBC mode. Use IV and KEY1 for encryption
+Generate final CipherText by appending IV and encrypted message
+Generate Message authenticated code using KEY2 - TAG 
+Append Final CipherText and TAG
+Encode the resultant string in HEX
+
+Baddecrypt.py
+Read Key file 
+Use first 16 Bytes as Key1 for symmetric Decryption
+Use Second 16 Bytes as Key2 for MAC generation
+Read ciphertextWithTag
+If the CipherText Length is less that 64 Bytes 
+	Return (We must have IV, 16 Byte Padded Message and TAG to successfully decrypt)
+Calculate CipherTextWithoutTag
+	Everything except the last 32Bytes of CipherText
+Retrieve Tag
+	Last 32 Bytes of Cipher text 
+Retrieve IV
+	First 16 Bytes of Cipher text
+Retrieve Plaintext Block
+	Call AES-CBC decryption using IV and KEY1
+Check Padding
+	Calculate PadByte Value
+		if Padbyte is greater than length of the Padded Plaintext
+			exit with "Padding error"
+		Calculate no of pad bytes
+			if No of Pad Bytes is invalid
+			exit with "Padding error"
+Check HMAC
+	If TAG is invalid
+	print "Tag doesn't verify!"
+    
+Find PlainText
+
+c. Why encryption the Encrypt then MAC construction is used. However, in baddecrypt.py, the Encrypt then MAC scheme is NOT followed. The cipher text is decrypted and then the padding is checked.
+The best solution is to follow strictly the Encrypt-then-MAC construction, where a Message Authentication Code (MAC) is applied to the ciphertext. If the MAC fails, we don't even need to look at the padding. If the MAC is correct, it is cryptographically unlikely that the padding has been tampered with.
+
+Read Key file 
+Use first 16 Bytes as Key1 for symmetric Decryption
+Use Second 16 Bytes as Key2 for MAC generation
+Read ciphertextWithTag
+Retrieve Tag
+	Last 32 Bytes of Cipher text 
+Check MAC
+	Verify Tag using KEY2
+	if Tag verification fails
+	Return "Tag doesn't verify!"
+Decrypt CipherText using IV and KEY1
+Check Padding in Plaintext with Pad
+Show plaintext

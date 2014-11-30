@@ -15,7 +15,7 @@ def convertStrToList(str1):
     while i<32:
         cipher.append(str1[i]+str1[i+1])
         i +=2
-    print cipher
+    #print cipher
     return cipher
 def main():
     if(len(sys.argv) > 2):
@@ -34,14 +34,15 @@ def main():
     firstByte = hexCiphertext[32:64]
     initializationVector = hexCiphertext[:32]
     cipherList = convertStrToList(firstByte)
-    print len(cipherList)
+    #print len(cipherList)
     ivList = convertStrToList(initializationVector)
 
     tag = hexCiphertext[64:128]
-    print tag
+    #print tag
     pos = 15
     val = 0
-    while pos >= 0:
+    print "The PlainText bytes would come in reverse, hold on tight..."
+    while pos >= 0:        
         for i in range(0,256):
             iv[pos] = '{:02x}'.format(i)
             firstBlock = ''.join(iv)
@@ -52,15 +53,16 @@ def main():
             proc = Popen(["baddecrypt.py",keyfile,finalText],stdout=PIPE, stderr=PIPE,shell=True)
             output = proc.communicate()[0]
             #print proc
-            print i
-            print output
+            #print i
+            #print output
             if(output.find("Tag doesn't verify!\n") != -1):
                 #print "intermediate Byte "
                 iByte =  val ^ i
                 #print iByte
                 interB[pos] = '{:02x}'.format(iByte)
+                sys.stdout.write(('{:02x}'.format(int(ivList[pos],16) ^ iByte)).decode('hex'))
                 dic.append('{:02x}'.format(int(ivList[pos],16) ^ iByte))
-                print dic
+                #print dic
                 break
         curPos = pos
         while curPos <= 15:
@@ -68,6 +70,7 @@ def main():
             curPos += 1
         pos -= 1
         val +=  1
+    print '\n'
     print dic
     reversedDic = ''.join(reversed(dic))
     print reversedDic.decode("hex")
