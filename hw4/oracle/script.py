@@ -55,7 +55,7 @@ def main():
             #print proc
             #print i
             #print output
-            if(output.find("Tag doesn't verify!\n") != -1):
+            if(output.find("Tag") != -1):                
                 #print "intermediate Byte "
                 iByte =  val ^ i
                 #print iByte
