@@ -27,7 +27,7 @@ def convertStrToList(str1):
     #print cipher
     return cipher
 def main():
-    print "Starting Padding Oracler"
+    print "Starting Padding Oracler, for help use -h option"
     keyfile = "keyfile"
     print "The default keyfile name is - keyfile, this should be in the current directory"
     try:
